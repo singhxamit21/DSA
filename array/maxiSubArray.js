@@ -17,7 +17,10 @@ function maxSubArray(nums) {
 
 // Example usage:
 console.log("Maximum sum of subarray:", maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // Output should be 6
+//Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+
 console.log("Maximum sum of subarray:", maxSubArray([1])); // Output should be 1
+//Explanation: The subarray [1] has the largest sum 1.
 
 
 

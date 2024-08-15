@@ -10,6 +10,7 @@ function maxProfit(prices) {
         if (prices[i] < minPrice) {
             minPrice = prices[i];
         } else {
+            // prices[i] - minPrice calculates the profit you would make if you bought the stock at minPrice and sold it on the current day (i).
             maxProfit = Math.max(maxProfit, prices[i] - minPrice);
         }
     }
