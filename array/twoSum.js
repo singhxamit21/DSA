@@ -1,23 +1,25 @@
+// ⚠️ This is not better solution, we'll make it better in the upcoming videos!
+
 function twoSum(nums, target) {
-    const map = {}; // Create a hash map to store each number's index
-
-    // Iterate through the array
+    // Loop through each number in the list
     for (let i = 0; i < nums.length; i++) {
-        const complement = target - nums[i]; // Calculate the complement needed to reach the target
-
-
-        // If the complement is found in the map, return the indices of the current number and its complement
-        if (map.hasOwnProperty(complement)) {
-            return [map[complement], i];
+      // For each number, check the rest of the list
+      for (let j = i + 1; j < nums.length; j++) {
+        // If the current number and the one we're checking add up to the target, return their indexes
+        if (nums[i] + nums[j] === target) {
+          return [i, j];
         }
-        
-        // Otherwise, store the current number's index in the map
-        map[nums[i]] = i;
+      }
     }
-    
-    // If no solution is found, return an empty array
+  
+    // If no matching pair is found, return an empty array
     return [];
-};
+  }
+  
+  const res = twoSum([2, 7, 11, 15], 9);
+  const res2 = twoSum([1, 3, 7, 9, 2], 11);
+  console.log(res);
+  console.log(res2);
 
 // Example usage:
 // console.log("Indices of the two numbers:", twoSum([2, 7, 11, 15], 9)); // Output should be [0, 1]
