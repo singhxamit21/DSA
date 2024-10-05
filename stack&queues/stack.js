@@ -1,52 +1,56 @@
-class Node {
-    constructor(value) {
-      this.value = value;
-      this.next = null;
-    }
+// Basic Stack Implementation
+
+class Stack {
+  constructor() {
+    this.stack = [];
   }
-  
-  class Stack {
-    constructor(value) {
-      const newNode = new Node(value);
-      this.first = newNode;
-      this.length = 1;
-    }
-  
-    push(value) {
-      const newNode = new Node(value);
-  
-      if (this.length === 0) {
-        this.first = newNode;
-      } else {
-        newNode.next = this.first;
-        this.first = newNode;
-        this.length++;
-        return this;
-      }
-    }
-  
-    pop() {
-      if (this.length === 0) {
-        return undefined;
-      }
-  
-      let temp = this.first;
-      this.first = this.first.next;
-      temp.next = null;
-      this.length--;
-      return temp;
-    }
-  
-    top() {
-      if (this.length === 0) {
-        return undefined;
-      }
-      return this.first;
-    }
+
+  push(element) {
+    this.stack.push(element);
   }
-  
-  let theStack = new Stack(0);
-  theStack.push(1);
-  theStack.push(2);
-  // theStack.pop();
-  console.log(theStack);
+
+  pop() {
+    if (this.isEmpty()) {
+      return "Stack is Empty. Can't perform pop.";
+    }
+
+    return this.stack.pop();
+  }
+
+  peek() {
+    if (this.isEmpty()) {
+      return "Stack is Empty. Can't perform peek.";
+    }
+
+    return this.stack[this.size() - 1];
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  size() {
+    return this.stack.length;
+  }
+
+  printStack() {}
+}
+
+const stack = new Stack();
+
+stack.push(10);
+stack.push(69);
+stack.push(420);
+
+console.log(stack.size());
+
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+
+console.log(stack.peek());
+
+console.log(stack.isEmpty());
+
+console.log(stack.size());
