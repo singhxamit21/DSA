@@ -1,177 +1,136 @@
+// Linked List in Javascript
+
 class Node {
-    constructor(value) {
-      this.head = value;
-      this.next = null;
-    }
+  constructor(data) {
+    this.data = data;
+    this.next = null;
   }
-  
-  class LinkedList {
-    constructor(value) {
-      this.head = new Node(value);
-      this.tail = this.head;
-      this.length = 1;
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  addFirst(data) {
+    const newNode = new Node(data);
+    newNode.next = this.head;
+    this.head = newNode;
+  }
+
+  addLast(data) {
+    const newNode = new Node(data);
+
+    if (!this.head) {
+      this.head = newNode;
+      return;
     }
-  
-    push(value) {
-      let newNode = new Node(value);
-  
-      if (!this.head) {
-        this.head = newNode;
-        this.tail = newNode;
-      }
-  
-      this.tail.next = newNode;
-      this.tail = newNode;
-      this.length++;
+
+    let current = this.head;
+    //loop through every element until next element(current.next) get null 
+    while (current.next) { 
+      current = current.next;
     }
-  
-    pop() {
-      if (!this.head) {
-        return undefined;
-      }
-  
-      let temp = this.head;
-      let prev = this.head;
-  
-      while (temp.next) {
-        // console.log("********** temp", temp);
-        prev = temp;
-        temp = prev.next;
-      }
-  
-      // console.log(prev);
-      this.tail = prev;
-      this.tail.next = null;
-      this.length--;
-  
-      if (this.length === 0) {
-        this.head = null;
-        this.tail = null;
-      }
-  
-      return temp;
+
+    current.next = newNode;
+  }
+
+  size() {
+    let count = 0;
+    let current = this.head;
+    while (current) {
+      count++;
+      current = current.next;
     }
-  
-    unshift(value) {
-      const newNode = new Node(value);
-  
-      if (!this.head) {
-        this.head = newNode;
-        this.tail = newNode;
-      }
-  
+    return count;
+  }
+
+  addAt(index, data) {
+    if (index < 0 || index > this.size()) {
+      console.error("Invalid Index");
+      return;
+    }
+
+    const newNode = new Node(data);
+    if (index === 0) {
       newNode.next = this.head;
       this.head = newNode;
-      this.length++;
-      return this;
+      return;
     }
-  
-    shift() {
-      if (!this.head) {
-        return undefined;
-      }
-  
-      // 1. Point to the first node/element
-      let temp = this.head;
-      // 2. Move the head to the next node/element
+
+    let current = this.head;
+    for (let i = 0; i < index - 1; i++) {
+      current = current.next;
+    }
+
+    newNode.next = current.next;
+    current.next = newNode;
+  }
+
+  removeTop() {
+    if (!this.head) {
+      return;
+    }
+
+    this.head = this.head.next;
+  }
+
+  removeLast() {
+    if (!this.head) {
+      return;
+    }
+
+    let current = this.head;
+    while (current.next.next) {
+      current = current.next;
+    }
+
+    current.next = null;
+  }
+
+  removeAt(index) {
+    if (index < 0 || index > this.size()) {
+      console.error("Invalid Index");
+      return;
+    }
+
+    if (index === 0) {
       this.head = this.head.next;
-      // 3. Remove first element
-      temp.next = null;
-      this.length--;
-  
-      // If we have one node in the list
-      if (this.length === 0) {
-        this.tail = null;
-      }
-  
-      return temp;
+      return;
     }
-  
-    getFirst() {
-      return this.head;
+
+    let current = this.head;
+    for (let i = 0; i < index - 1; i++) {
+      current = current.next;
     }
-  
-    getLast() {
-      if (!this.head) {
-        return null;
-      }
-  
-      let node = this.head;
-  
-      while (node) {
-        // console.log("***********", node);
-        if (!node.next) {
-          return node;
-        }
-        node = node.next;
-      }
-    }
-  
-    get(index) {
-      let counter = 0;
-      let node = this.head;
-  
-      while (node) {
-        if (counter === index) {
-          return node;
-        }
-  
-        counter++;
-        node = node.next;
-      }
-  
-      return null;
-    }
-  
-    set(index, value) {
-      let temp = this.get(index);
-      console.log("----------", temp);
-  
-      if (temp) {
-        temp.value = value;
-        return true;
-      }
-  
-      return false;
-    }
-  
-    insert(index, value) {
-      if (index === 0) {
-        return this.unshift(value);
-      }
-  
-      if (index === this.length) {
-        return this.push(value);
-      }
-  
-      const newNode = new Node(value);
-      // Uses the get method to find the node right before the desired position (index - 1).
-      const temp = this.get(index - 1);
-  
-      newNode.next = temp.next;
-      temp.next = newNode;
-      this.length++;
-      return true;
-    }
-  
-    size() {
-      let counter = 0;
-      let node = this.head;
-  
-      while (node) {
-        counter++;
-        node = node.next;
-      }
-  
-      return counter;
-    }
-  
-    clear() {
-      this.head = null;
+
+    if (current.next) {
+      current.next = current.next.next;
     }
   }
-  
-  const myLinkedList = new LinkedList(1);
-  myLinkedList.push(2);
-  myLinkedList.push(3);
-  console.log(myLinkedList);
+
+  print() {
+    let current = this.head;
+    while (current) {
+      console.log(current.data);
+      current = current.next;
+    }
+  }
+}
+
+const linkedlist = new LinkedList();
+
+linkedlist.addFirst(5);
+linkedlist.addFirst(3);
+linkedlist.addFirst(8);
+linkedlist.addLast(6);
+
+linkedlist.removeTop();
+
+linkedlist.addAt(2, 8);
+
+linkedlist.removeLast();
+linkedlist.removeAt(2);
+
+linkedlist.print();
+console.log("size = " + linkedlist.size());
