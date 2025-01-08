@@ -11,3 +11,15 @@ const fibonacciSequence = (number) => {
 };
 
 console.log(fibonacciSequence(5));
+
+//Recursive 
+// const fibonacciSequence = (n, sequence = [0, 1]) => {
+//     if (n <= 1) return [0]; // Special case for 1 term
+//     if (sequence.length >= n) return sequence;
+    
+//     const nextTerm = sequence[sequence.length - 1] + sequence[sequence.length - 2];
+//     sequence.push(nextTerm);
+//     return fibonacciSequence(n, sequence);
+// };
+
+// console.log(fibonacciSequence(6)); // Output: [0, 1, 1, 2, 3, 5]
