@@ -47,7 +47,7 @@ var array2 = [
 ];
 
 function getDistinctValues(array, key) {
-    return [...new Set(array.map(item => item[key]))];
+    return [...new Set(array2.map(item => item[key]))];
 }
 
 var distinctAges = getDistinctValues(array2, "age");
