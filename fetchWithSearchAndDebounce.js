@@ -46,8 +46,8 @@ const SearchBar = () => {
       return;
     }
     const filteredProducts = products.filter((product) =>
-      product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchTerm.toLowerCase())
+      product.title && product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setResults(filteredProducts);
   }, 500);
