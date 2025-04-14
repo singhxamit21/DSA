@@ -6,6 +6,7 @@ function createTaskManager(concurrency = 2) {
     function runNext() {
       if (running >= concurrency || queue.length === 0) return;
   
+      //remove element from front
       const taskFn = queue.shift();
       running++;
   
