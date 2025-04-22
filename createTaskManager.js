@@ -20,7 +20,6 @@ function createTaskManager(concurrency = 2) {
         .finally(() => {
           running--;
           runNext(); // Start next task after one finishes
-          runNext(); // Start more if slots are available
         });
     }
   
@@ -37,14 +36,17 @@ function createTaskManager(concurrency = 2) {
   }
   
   // Example usage
-  const delayTask = (name, delay) => () =>
-    new Promise(resolve => {
-      console.log(`Starting ${name}`);
-      setTimeout(() => {
-        console.log(`Finished ${name}`);
-        resolve();
-      }, delay);
-    });
+  const delayTask = (name, delay) => {
+    return () => {
+      return new Promise(resolve => {
+        console.log(`Starting ${name}`);
+        setTimeout(() => {
+          console.log(`Finished ${name}`);
+          resolve();
+        }, delay);
+      });
+    };
+  };
   
   const tasks = [
     delayTask("Task 1", 1000),
