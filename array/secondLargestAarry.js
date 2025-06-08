@@ -1,45 +1,42 @@
 function secondLargest(arr) {
-    let first = arr[0];
-    let second = -Infinity; // Initialize second largest as negative infinity
-    
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] > first) {
+    if (arr.length < 2) return null;
+
+    let first = -Infinity, second = -Infinity;
+
+    for (const num of arr) {
+        if (num > first) {
             second = first;
-            first = arr[i];
-        } else if (arr[i] > second && arr[i] !== first) {
-            second = arr[i];
+            first = num;
+        } else if (num > second && num < first) {
+            second = num;
         }
     }
-    
-    return second !== -Infinity ? second : null; // If second largest exists, return it, otherwise return null
+
+    return second !== -Infinity ? second : null;
 }
 
-// Example usage:
-const arr = [8,20,10,10, 5, 8, 20];
-console.log("Second largest element:", secondLargest(arr)); // Output should be 10
-
 function thirdLargest(arr) {
-    let first = arr[0];
-    let second = -Infinity;
-    let third = -Infinity;
-    
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] > first) {
+    if (arr.length < 3) return null;
+
+    let first = -Infinity, second = -Infinity, third = -Infinity;
+
+    for (const num of arr) {
+        if (num > first) {
             third = second;
             second = first;
-            first = arr[i];
-        } else if (arr[i] > second && arr[i] !== first) {
+            first = num;
+        } else if (num > second && num < first) {
             third = second;
-            second = arr[i];
-        } else if (arr[i] > third && arr[i] !== second && arr[i] !== first) {
-            third = arr[i];
+            second = num;
+        } else if (num > third && num < second) {
+            third = num;
         }
     }
-    
+
     return third !== -Infinity ? third : null;
 }
 
 // Example usage:
-// const arr = [10, 5, 8, 20, 15];
-console.log("Third largest element:", thirdLargest(arr)); // Output should be 15
-
+const arr = [8, 20, 10, 10, 5, 8, 20];
+console.log("Second largest element:", secondLargest(arr)); // Output: 10
+console.log("Third largest element:", thirdLargest(arr));   // Output: 8
